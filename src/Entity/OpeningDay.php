@@ -17,11 +17,11 @@ class OpeningDay
     #[ORM\Column(length: 255)]
     private ?string $dayOfWeek = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $startTime = null;
+    #[ORM\Column(length: 255)]
+    private ?string $startTime = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $endTime = null;
+    #[ORM\Column(length: 255)]
+    private ?string $endTime = null;
 
     #[ORM\ManyToOne(inversedBy: 'openingDay')]
     private ?User $user = null;
@@ -43,24 +43,24 @@ class OpeningDay
         return $this;
     }
 
-    public function getStartTime(): ?\DateTimeInterface
+    public function getStartTime(): ?string
     {
         return $this->startTime;
     }
 
-    public function setStartTime(\DateTimeInterface $startTime): static
+    public function setStartTime(string $startTime): static
     {
         $this->startTime = $startTime;
 
         return $this;
     }
 
-    public function getEndTime(): ?\DateTimeInterface
+    public function getEndTime(): ?string
     {
         return $this->endTime;
     }
 
-    public function setEndTime(\DateTimeInterface $endTime): static
+    public function setEndTime(string $endTime): static
     {
         $this->endTime = $endTime;
 

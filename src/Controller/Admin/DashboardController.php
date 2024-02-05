@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Car;
 use App\Entity\CarImage;
+use App\Entity\OpeningDay;
+use App\Entity\Service;
+use App\Entity\Testimonial;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -45,6 +48,18 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Images', 'fas fa-photo-video')->setSubItems([
             MenuItem::linkToCrud('Médiathèque','fas fa-photo-video', CarImage::class),
             MenuItem::linkToCrud('Ajouter des images','fas fa-plus', CarImage::class)->setAction(Crud::PAGE_NEW),
+        ]);
+        yield MenuItem::subMenu('Services', 'fas fa-gear')->setSubItems([
+            MenuItem::linkToCrud('Tous les services','fas fa-gear', Service::class),
+            MenuItem::linkToCrud('Ajouter un service','fas fa-plus', Service::class)->setAction(Crud::PAGE_NEW),
+        ]);
+        yield MenuItem::subMenu('Horaires D\'ouvertures', 'fas fa-calendar-day')->setSubItems([
+            MenuItem::linkToCrud('Voir les horaires','fas fa-calendar-day', OpeningDay::class),
+            MenuItem::linkToCrud('Modifer','fas fa-pen', OpeningDay::class)->setAction(Crud::PAGE_NEW),
+        ]);
+        yield MenuItem::subMenu('Commentaires', 'fas fa-comment-dots')->setSubItems([
+            MenuItem::linkToCrud('Voir les Commentaires','fas fa-comment', Testimonial::class),
+            MenuItem::linkToCrud('Ajouter un commentaire','fas fa-plus', Testimonial::class)->setAction(Crud::PAGE_NEW),
         ]);
         if ($this->isGranted('ROLE_ADMIN')) {
         yield MenuItem::subMenu('Comptes salariés', 'fas fa-user')->setSubItems([
