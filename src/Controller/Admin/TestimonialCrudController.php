@@ -25,7 +25,7 @@ class TestimonialCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
-
+        yield TextField::new('pseudo');
         yield TextareaField::new('content');
         yield AssociationField::new('users');
         yield NumberField::new('note');

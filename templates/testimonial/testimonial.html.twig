@@ -1,0 +1,19 @@
+{% if testimonial.approved %}
+    <div class="col-md-4">
+        <div class="card p-3 text-center px-4">
+            <div class="user-content">
+                <h5 class="mb-0">{{ testimonial.pseudo }}</h5>
+                <p>{{ testimonial.content }}</p>
+            </div>
+            <div class="ratings">
+                {% for star in range(1, 6) %}
+                    {% if testimonial.note >= star %}
+                        <i class="fa fa-star"></i>
+                    {% else %}
+                        <i class="fa fa-star-o"></i>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

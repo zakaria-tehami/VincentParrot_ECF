@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('build/app.js') }}"></script>
+	{{ parent() }}
+	<script src="{{ asset('build/app.js') }}"></script>
 {% endblock %}
 
 {% block stylesheets %}
@@ -19,97 +19,9 @@
 			<div class="col-12 text-center mb-3">
 				<h1 class="display-5 fw-bold text-body-emphasis">Que disent nos clients</h1>
 			</div>
-			<div class="col-md-4">
-				<div class="card p-3 text-center px-4">
-					<div class="user-content">
-						<h5 class="mb-0">Bruce Hardy</h5>
-						<span>Software Developer</span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="ratings">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card p-3 text-center px-4">
-					<div class="user-content">
-						<h5 class="mb-0">Mark Smith</h5>
-						<span>Web Developer</span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="ratings">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card p-3 text-center px-4">
-					<div class="user-content">
-						<h5 class="mb-0">Veera  Duncan</h5>
-						<span>Software Architect</span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="ratings">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card p-3 text-center px-4">
-					<div class="user-content">
-						<h5 class="mb-0">Veera  Duncan</h5>
-						<span>Software Architect</span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="ratings">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card p-3 text-center px-4">
-					<div class="user-content">
-						<h5 class="mb-0">Veera  Duncan</h5>
-						<span>Software Architect</span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="ratings">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card p-3 text-center px-4">
-					<div class="user-content">
-						<h5 class="mb-0">Veera  Duncan</h5>
-						<span>Software Architect</span>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					</div>
-					<div class="ratings">
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-					</div>
-				</div>
-			</div>
+			{% for testimonial in testimonials %}
+            {% include 'testimonial/testimonial.html.twig' with {'testimonial': testimonial} %}
+        {% endfor %}
 		</div>
 	</div>
 	<div class="container mb-5">
@@ -127,7 +39,7 @@
 						<label for="floatingTextarea2">Avis</label>
 						<textarea class="form-control" placeholder="laisser nous votre avis ..." id="floatingTextarea2" style="height: 200px"></textarea>
 					</div>
-					<button class="w-100 btn btn-primary btn-lg" type="submit">Envoyer</button>
+					<button class="w-100 btn btn-dark btn-lg" type="submit">Envoyer</button>
 				</div>
 			</form>
 		</div>

@@ -3,3 +3,12 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+cars_list:
+    path: /cars
+    controller: 'App\Controller\CarController::carsList'
+car_detail:
+    path: /car/{slug}
+    controller: 'App\Controller\CarController::carDetail'
+app_services:
+    path: /services
+    controller: 'App\Controller\ServiceController::servicesList'

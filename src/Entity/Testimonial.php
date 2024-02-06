@@ -16,6 +16,12 @@ class Testimonial
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    #[ORM\Column]
+    private ?string $pseudo = null;
+
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
@@ -43,9 +49,20 @@ class Testimonial
         return $this->content;
     }
 
-    public function setContent(string $content): static
+    public function setContent(string $Pseudo): static
     {
-        $this->content = $content;
+        $this->content = $Pseudo;
+
+        return $this;
+    }
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $Pseudo): static
+    {
+        $this->pseudo = $Pseudo;
 
         return $this;
     }
