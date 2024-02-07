@@ -1,71 +1,67 @@
-
-
-	<footer class="py-5 container border-top">
-		<div class="row">
-			<div class="col-6 col-md-4 mb-3">
-            <h5>Horaires D'ouverture</h5>
-            {% for openingDay in openingDays %}
-                <p>
-                    {{ openingDay.dayOfWeek }} : {{ openingDay.startTime }} - {{ openingDay.endTime }}
-                </p>
-            {% endfor %}
-        </div>
-
-			
-
-			<div class="col-6 col-md-2 mb-3">
-				<h5>Section</h5>
-				<ul class="nav flex-column">
-					<li class="nav-item mb-2">
-						<a href="#" class="nav-link p-0 text-body-secondary">Home</a>
-					</li>
-					<li class="nav-item mb-2">
-						<a href="#" class="nav-link p-0 text-body-secondary">Features</a>
-					</li>
-					<li class="nav-item mb-2">
-						<a href="#" class="nav-link p-0 text-body-secondary">Pricing</a>
-					</li>
-					<li class="nav-item mb-2">
-						<a href="#" class="nav-link p-0 text-body-secondary">FAQs</a>
-					</li>
-					<li class="nav-item mb-2">
-						<a href="#" class="nav-link p-0 text-body-secondary">About</a>
-					</li>
-				</ul>
-			</div>
-
-			<div class="col-md-5 offset-md-1 mb-3">
-				<form>
-					<h5>Subscribe to our newsletter</h5>
-					<p>Monthly digest of what's new and exciting from us.</p>
-					<div class="d-flex flex-column flex-sm-row w-100 gap-2">
-						<label for="newsletter1" class="visually-hidden">Email address</label>
-						<input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-						<button class="btn btn-primary" type="button">Subscribe</button>
-					</div>
-				</form>
-			</div>
+<footer class="py-5 container border-top">
+	<div class="row">
+		<div class="col-6 col-md-4 mb-3">
+			<h5>Horaires D'ouverture</h5>
+			{% for openingDay in openingDays %}
+				<p>
+					{{ openingDay.dayOfWeek }}
+					:
+					{{ openingDay.startTime }}
+					-
+					{{ openingDay.endTime }}
+				</p>
+			{% endfor %}
 		</div>
-
-		<div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-			<p>© 2024 Vincent Parrot. Tout droit réservé .</p>
-			<ul class="list-unstyled d-flex">
-				<li class="ms-3">
-					<a class="link-body-emphasis" href="#">
-						<i class="fa-brands fa-x-twitter"></i>
-					</a>
+		<div class="col-6 col-md-2 mb-3">
+			<ul class="nav flex-column">
+				<li class="nav-item mb-4">
+					<a href="/" class="nav-link p-0 text-body-secondary">Accueil</a>
 				</li>
-				<li class="ms-3">
-					<a class="link-body-emphasis" href="#">
-						<i class="fa-brands fa-square-instagram"></i>
-					</a>
+				<li class="nav-item mb-4">
+					<a href="{{ path('app_services') }}" class="nav-link p-0 text-body-secondary">Services</a>
 				</li>
-				<li class="ms-3">
-					<a class="link-body-emphasis" href="#">
-						<i class="fa-brands fa-facebook-f"></i>
-					</a>
+				<li class="nav-item mb-4">
+					<a href="{{ path('cars_list') }}" class="nav-link p-0 text-body-secondary">Occasions</a>
+				</li>
+				<li class="nav-item mb-4">
+					<a href="{{ path('app_testimonial') }}" class="nav-link p-0 text-body-secondary">Avis</a>
+				</li>
+				<li class="nav-item mb-4">
+					<a href="{{ path('app_login') }}" class="nav-link p-0 text-body-secondary">Espace pros</a>
 				</li>
 			</ul>
 		</div>
-	</footer>
+		<div class="col-6 col-md-3 mb-3">
+		<h5 class="mb-3">Nous contacter</h5>
+			<ul class="nav flex-column">
+				<p class="mb-3">Mail: vincent.parrot@auto.ff</p>
+				<p class="mb-3">Téléphone: 07/77/70/77/70</p>
+			</ul>
+		</div>
+		<div class="col-6 col-md-3 mb-3">
+			<h5 class="mb-3">Notre Adresse</h5>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d180.58590785531624!2d1.442868602097305!3d43.59874293933346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebb7d5b572ab5%3A0xcf6f3f0346c9b49f!2s14%20Rue%20des%20Paradoux%2C%2031000%20Toulouse!5e0!3m2!1sfr!2sfr!4v1707307400687!5m2!1sfr!2sfr" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		</div>
+	</div>
+	<div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+		<p>© 2024 Vincent Parrot. Tout droit réservé .</p>
+		<ul class="list-unstyled d-flex">
+			<li class="ms-3">
+				<a class="link-body-emphasis" href="#">
+					<i class="fa-brands fa-x-twitter"></i>
+				</a>
+			</li>
+			<li class="ms-3">
+				<a class="link-body-emphasis" href="#">
+					<i class="fa-brands fa-square-instagram"></i>
+				</a>
+			</li>
+			<li class="ms-3">
+				<a class="link-body-emphasis" href="#">
+					<i class="fa-brands fa-facebook-f"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+</footer>
 
