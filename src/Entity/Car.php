@@ -41,7 +41,7 @@ class Car
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'car', targetEntity: CarImage::class)]
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: CarImage::class, cascade: ['persist', 'remove'])]
     private Collection $carImage;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
