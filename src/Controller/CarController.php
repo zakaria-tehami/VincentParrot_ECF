@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\CarRepository;
 use App\Repository\OpeningDayRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -53,5 +54,20 @@ public function carsList(CarRepository $carRepository, OpeningDayRepository $ope
     ]);
 }
 
+#[Route('/cars/filtered', name: 'filtered_cars_list')]
+public function filteredCarsList(Request $request, CarRepository $carRepository, OpeningDayRepository $openingDayRepository): Response
+{
+    $filters = $request->request->all();
+
+    // Add your filtering logic using $filters
+    $filteredCars = $carRepository->findByFilters($filters);
+    $openingDays = $openingDayRepository->findAll();
+
+    // Render the filtered car list
+    return $this->render('car/filtered_cars_list.html.twig', [
+        'cars' => $filteredCars,
+        'openingDays' => $openingDays,
+    ]);
+}
 
 }

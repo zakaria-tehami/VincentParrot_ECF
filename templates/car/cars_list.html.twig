@@ -5,10 +5,90 @@
 {% block body %}
     <div class="container text-center">
         <h1 class="display-5 fw-bold text-body-emphasis mt-5 mb-5">Nos véhicules d'occasion</h1>
-        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+        <!-- Filters -->
+        <div class="mb-5">
+            <label for="fuel">Carburant:</label>
+            <select id="fuel">
+                <option value="">Tous</option>
+                <option value="essence">Essence</option>
+                <option value="diesel">Diesel</option>
+            </select>
+
+            <label for="price">Prix:</label>
+            <select id="price">
+                <option value="">Tous</option>
+                <option value="0-5000">0 - 5000 €</option>
+                <option value="5100-10000">5100 € - 1 0000 €</option>
+                <option value="11000-15000">11000 € - 15000 €</option>
+                <option value="16000-20000">16000 € - 20000 €</option>
+                <option value="21000-25000">21000 € - 25000 €</option>
+                <option value="26000-30000">26000 € - 30000 €</option>
+                <option value="31000-40000">31000 € - 40000 €</option>
+                <option value="41000-50000">41000 € - 50000 €</option>
+                <option value="51000-60000">51000 € - 60000 €</option>
+                <option value="61000-70000">61000 € - 70000 €</option>
+            </select>
+
+            <label for="kilometer">Kilométrage:</label>
+            <select id="kilometer">
+            <option value="">Tous</option>
+                <option value="0-25000">0 - 25000 km</option>
+                <option value="26000-50000">26000 km - 50000 km</option>
+                <option value="51000-75000">51000 km - 75000 km</option>
+                <option value="76000-100000">76000 km - 100000 km</option>
+                <option value="101000-125000">101000 km - 125000 km</option>
+                <option value="126000-150000">126000 km - 150000km</option>
+            </select>
+
+            <label for="year">Année:</label>
+            <select id="year">
+                <option value="">Tous</option>
+                <option value="2010-2015">2010 - 2015</option>
+                <option value="2016-2020">2016 - 2020</option>
+                <option value="2021-2025">2021 - 2025</option>
+            </select>
+
+            <button id="applyFilters" class="btn btn-dark btn-sm btn-outline">Appliquer</button>
+        </div>
+
+        <!-- Car list container -->
+        <div id="carListContainer" class="row row-cols-1 row-cols-md-3 mb-3 text-center">
             {% for car in cars %}
                 {% include 'car/car_card.html.twig' with {'car': car} %}
             {% endfor %}
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Function to update car list based on filters
+        function updateCarList() {
+            var filters = {
+                fuel: $('#fuel').val(),
+                price: $('#price').val(),
+                kilometer: $('#kilometer').val(),
+                year: $('#year').val()
+            };
+
+            $.ajax({
+                url: "{{ path('filtered_cars_list') }}", // Mise à jour avec le nom de votre route pour la liste de voitures filtrées
+                method: 'POST',
+                data: filters,
+                success: function(response) {
+                    $('#carListContainer').html(response);
+                },
+                error: function(error) {
+                    console.error('Erreur lors de la récupération de la liste de voitures filtrées :', error);
+                }
+            });
+        }
+
+        // Event listener for apply button click
+        $('#applyFilters').click(function() {
+            updateCarList();
+        });
+    });
+</script>
 {% endblock %}
