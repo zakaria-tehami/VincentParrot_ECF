@@ -2,7 +2,7 @@
     <div class="card mb-4 rounded-3 shadow-sm">
         {% if car.carImage %}
             {% set firstCarImage = car.carImage.first %}
-            <img src="{{ asset('uploads/' ~ firstCarImage.filename) }}" class="card-img-top img-fluid" alt="Image" style="height: 200px; object-fit: cover;">
+            <img src="{{ asset('uploads/' ~ firstCarImage.filename) }}" class="card-img-top img-fluid" alt="Image" style="height: 300px; object-fit: cover;">
         {% endif %}
         <div class="card-body">
             <h1 class="card-title">{{ car.name }}</h1>
