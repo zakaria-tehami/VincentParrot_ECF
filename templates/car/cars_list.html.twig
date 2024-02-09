@@ -47,14 +47,27 @@
 
             <button id="applyFilters" class="btn btn-dark btn-sm btn-outline">Appliquer</button>
         </div>
-
-        <!-- Car list container -->
-        <div id="carListContainer" class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-            {% for car in cars %}
-                {% include 'car/car_card.html.twig' with {'car': car} %}
-            {% endfor %}
-        </div>
     </div>
+        <!-- Car list container -->
+<div id="carListContainer" class="container">
+
+	{% for car in cars %}
+		{% if loop.index0 % 3 == 0 %}
+			{% if loop.index0 != 0 %}
+			</div>
+		{% endif %}
+		<div class="row">
+		{% endif %}
+
+
+		{% include 'car/car_card.html.twig' with {'car': car} %}
+
+
+		{% if loop.last %}
+		</div>
+	{% endif %}
+{% endfor %}
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
