@@ -12,3 +12,7 @@ car_detail:
 app_services:
     path: /services
     controller: 'App\Controller\ServiceController::servicesList'
+submit_testimonial:
+    path: '/submit_testimonial'
+    controller: App\Controller\TestimonialController::submitTestimonial
+    methods: ['POST']
