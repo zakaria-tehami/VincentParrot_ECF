@@ -34,7 +34,7 @@ class TestimonialController extends AbstractController
     public function submitTestimonial(Request $request): Response
     {
         $pseudo = $request->request->get('pseudonym');
-        $content = $request->request->get('floatingTextarea2');
+        $content = $request->request->get('content');
         $note = $request->request->get('rating');
 
         // Créer une nouvelle instance de l'entité Testimonial
