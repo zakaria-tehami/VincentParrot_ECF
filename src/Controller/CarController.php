@@ -2,17 +2,24 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Form\CarContactType;
+use App\Form\ContactType;
 use App\Repository\CarRepository;
 use App\Repository\OpeningDayRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Mime\Email;
 
 class CarController extends AbstractController
 {
     #[Route('/car/{slug}', name: 'car_detail')]
-public function carDetail(string $slug, CarRepository $carRepository, OpeningDayRepository $openingDayRepository): Response
+public function carDetail(string $slug, CarRepository $carRepository, OpeningDayRepository $openingDayRepository, Request $request, MailerInterface $mailer, SessionInterface $session, EntityManagerInterface $entityManager): Response
 {
     // Récupérer la voiture par le slug depuis le repository
     $car = $carRepository->findOneBy(['slug' => $slug]);
@@ -23,10 +30,57 @@ public function carDetail(string $slug, CarRepository $carRepository, OpeningDay
         throw $this->createNotFoundException('Car not found');
     }
 
+
+    $form = $this->createForm(CarContactType::class, null, [
+        'car_name' => $car->getName(),
+        'car_price' => $car->getPrice(),
+        'car_id' => $car->getId(),
+    ]);
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $data = $form->getData();
+
+        // Save to the database
+        $contact = new Contact();
+        $contact->setFirstName($data->getFirstName());
+        $contact->setLastName($data->getLastName());
+        $contact->setEmail($data->getEmail());
+        $contact->setPhoneNumber($data->getPhoneNumber());
+        $contact->setContent($data->getContent());
+        $contact->setCarId($car->getId());
+        $contact->setCarName($car->getName());
+        $contact->setCarPrice($car->getPrice());
+
+        $entityManager->persist($contact);
+        $entityManager->flush();
+
+        // Send email
+        $address = $data->getEmail();
+        $content = $data->getContent();
+        $subject = $car->getName() . "/" . $car->getPrice();
+
+        $email = (new Email())
+            ->from($address)
+            ->to('zaki.tehami@gmail.com')
+            ->subject($subject)
+            ->text($content);
+
+        $mailer->send($email);
+
+        $session->getFlashBag()->add('success', 'Votre message a été envoyé avec succès.');
+    }
+
+
+
+
+
     // Passer la voiture à la vue
     return $this->render('car/carDetail.html.twig', [
         'car' => $car,
         'openingDays' => $openingDays,
+        'formulaire' => $form->createView(),
     ]);
 }
     #[Route('/car', name: 'car_list')]

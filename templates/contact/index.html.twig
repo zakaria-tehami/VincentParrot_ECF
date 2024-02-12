@@ -1,52 +1,66 @@
+{# templates/contact/index.html.twig #}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Contactez nous!{% endblock %}
+{% block title %}Contactez nous!
+{% endblock %}
 
 {% block body %}
 
-<div class="container col-xxl-8 px-4 py-5">
-	<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-		<div class="col-10 col-sm-8 col-lg-6 contact">
-			<img src="{{ asset('assets/img/garage.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="garage-omage" width="700" height="500" loading="lazy">
-		</div>
-		<div class="col-lg-6">
-			<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-5">Contactez nous</h1>
-			<p class="lead mb-5">Merci de nous faire part de vos questions, suggestions ou préoccupations. Nous ferons de notre mieux pour vous répondre dans les plus brefs délais.</p>
+	<div class="container col-xxl-8 px-4 py-5">
+		<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+			<div
+				class="col-10 col-sm-8 col-lg-6 contact">
+				{# Afficher les éventuels messages flash #}
+				{% for flash_message in app.flashes('success') %}
+					<div class="alert alert-success">{{ flash_message }}</div>
+				{% endfor %}
+
+				<img src="{{ asset('assets/img/garage.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="garage-omage" width="700" height="500" loading="lazy">
+			</div>
+			<div class="col-lg-6">
+				<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-5">Contactez nous</h1>
+				<p class="lead mb-5">Merci de nous faire part de vos questions, suggestions ou préoccupations. Nous ferons de notre mieux pour vous répondre dans les plus brefs délais.</p>
+
+				{# Afficher le formulaire #}
+				{{ form_start(formulaire, {'attr': {'class': 'needs-validation'}}) }}
 				<form class="needs-validation" novalidate="">
-					<div class="row g-3">
-						<div class="col-sm-6">
-							<input type="text" class="form-control" id="firstName" placeholder="Votre Prénom" value="" required="">
-							<div class="invalid-feedback">
-								Champ obligatoire.
+					<form class="needs-validation" novalidate="">
+						<div class="row g-3">
+							<div class="col-sm-6 mb-3">
+								{{ form_row(formulaire.firstName, {'label': false,'attr': {'class': 'form-control', 'placeholder': 'Votre Prénom', 'required': 'required'}}) }}
+								{{ form_errors(formulaire.firstName) }}
+							</div>
+							<div class="col-sm-6 mb-3">
+								{{ form_row(formulaire.lastName, {'label': false,'attr': {'class': 'form-control', 'placeholder': 'Votre Nom', 'required': 'required'}}) }}
+								{{ form_errors(formulaire.lastName) }}
 							</div>
 						</div>
-						<div class="col-sm-6">
-							<input type="text" class="form-control" id="lastName" placeholder="Votre Nom" value="" required="">
-							<div class="invalid-feedback">
-								Champ obligatoire.
-							</div>
+
+						{# Champ Email #}
+						<div class="col-12 mb-3">
+							{{ form_row(formulaire.email, {'label': false, 'attr': {'class': 'form-control', 'placeholder': 'Votre email', 'required': 'required'}}) }}
+							{{ form_errors(formulaire.email) }}
 						</div>
-						<div class="col-12">
-							<input type="email" class="form-control" id="email" placeholder="Votre email" required="">
-							<div class="invalid-feedback">
-								Entrez une adresse mail valide s'il vous plait ...
-							</div>
+
+						{# Champ Numéro de téléphone #}
+						<div class="col-12 mb-3">
+							{{ form_row(formulaire.phoneNumber, {'label': false, 'attr': {'class': 'form-control', 'placeholder': 'Votre numéro de téléphone'}}) }}
+							{{ form_errors(formulaire.phoneNumber) }}
 						</div>
-						<div class="col-12">
-							<textarea class="form-control" placeholder="Votre message" id="floatingTextarea2" style="height: 100px"></textarea>
-							<div class="invalid-feedback">
-								Veillez rentre votre message ...
-							</div>
+
+						{# Champ Message avec une hauteur de 100px #}
+						<div class="col-12 mb-3">
+							{{ form_row(formulaire.content, {'label': false, 'attr': {'class': 'form-control', 'placeholder': 'Votre message', 'style': 'height: 100px;', 'required': 'required'}}) }}
+							{{ form_errors(formulaire.content) }}
 						</div>
-					</div>
-					<hr class="my-4">
-					<button class="w-100 btn btn-dark btn-lg" type="submit">Envoyer</button>
-				</form>
+
+						<hr class="my-4">
+						{{ form_end(formulaire) }}
+					</form>
+				</div>
+			</div>
 		</div>
-	</div>
-</div>{% endblock %}
 
-
-
-
+	{% endblock %}
 

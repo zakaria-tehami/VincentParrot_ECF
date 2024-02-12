@@ -44,9 +44,6 @@ class Car
     #[ORM\OneToMany(mappedBy: 'car', targetEntity: CarImage::class, cascade: ['persist', 'remove'])]
     private Collection $carImage;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Contact $contact = null;
-
     public function __construct()
     {
         $this->carImage = new ArrayCollection();
@@ -183,17 +180,6 @@ class Car
         return $this;
     }
 
-    public function getContact(): ?Contact
-    {
-        return $this->contact;
-    }
-
-    public function setContact(?Contact $contact): static
-    {
-        $this->contact = $contact;
-
-        return $this;
-    }
     public function __toString(): string
     {
         return $this->name . "(" . $this->id .  ")";

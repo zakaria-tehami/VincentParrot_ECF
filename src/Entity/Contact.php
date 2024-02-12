@@ -32,6 +32,19 @@ class Contact
     #[ORM\ManyToOne(inversedBy: 'contact')]
     private ?User $user = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?car $car = null;
+
+    // Ajoutez ces propriétés
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $carName = null;
+
+    #[ORM\Column(type: 'float', nullable: true)]
+    private ?float $carPrice = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $carId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,4 +121,54 @@ class Contact
 
         return $this;
     }
+
+    public function getCar(): ?Car
+    {
+        return $this->car;
+    }
+
+    public function setCar(?Car $car): static
+    {
+        $this->car = $car;
+
+        return $this;
+    }
+
+
+    public function getCarPrice(): ?float
+    {
+        return $this->carPrice;
+    }
+
+    public function setCarPrice(?float $carPrice): static
+    {
+        $this->carPrice = $carPrice;
+
+        return $this;
+    }
+
+    public function getCarId(): ?int
+    {
+        return $this->carId;
+    }
+
+    public function setCarId(?int $carId): static
+    {
+        $this->carId = $carId;
+
+        return $this;
+    }
+
+    public function getCarName(): ?string
+    {
+        return $this->carName;
+    }
+
+    public function setCarName(?string $carName): static
+    {
+        $this->carName = $carName;
+
+        return $this;
+    }
+
 }
