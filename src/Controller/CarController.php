@@ -70,6 +70,7 @@ public function carDetail(string $slug, CarRepository $carRepository, OpeningDay
         $mailer->send($email);
 
         $session->getFlashBag()->add('success', 'Votre message a été envoyé avec succès.');
+        return $this->redirectToRoute('car_detail');
     }
 
 

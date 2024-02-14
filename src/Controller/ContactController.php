@@ -52,6 +52,7 @@ class ContactController extends AbstractController
             $mailer->send($email);
 
             $session->getFlashBag()->add('success', 'Votre message a été envoyé avec succès.');
+            return $this->redirectToRoute('app_contact');
         }
 
         return $this->render('contact/index.html.twig', [
