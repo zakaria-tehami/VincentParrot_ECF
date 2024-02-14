@@ -65,6 +65,15 @@ Accès au Site
 
 Accédez au site dans votre navigateur : http://127.0.0.1:8000
 
+Pour créer un admin du site exécuter la requète sql :
+
+```bash
+INSERT INTO user (email, roles, password, first_name, last_name)
+VALUES ('vincent.parrot@auto.fr', '["ROLE_ADMIN"]', '$2y$13$oYQNWxGBGCSZZA4kPLaKouB4T/7UANEj0HmZ5O.GgvR6EZlPhXuei', 'Vincent', 'Parrot');
+```
+
+Et si besoin de créer des salarié, a faire depuis l'espace admin.
+
 Tester l'envoie des mails en local : 
 
 Configurer MailTrap et mettre  à jour le fichier mailer.yaml ou .env avec votre DNS MailTrap
