@@ -1,7 +1,7 @@
 <div class="col-lg">
     <div class="card mb-4 rounded-3 shadow-sm" style="width: 100%;">
         {% if car.carImage %}
-            {% set firstCarImage = car.carImage.first %}
+            {% set firstCarImage = car.carImage %}
             <img src="{{ asset('uploads/' ~ firstCarImage.filename) }}" class="card-img-top img-fluid" alt="Image" style="height: 300px; object-fit: cover;">
         {% endif %}
         <div class="card-body">

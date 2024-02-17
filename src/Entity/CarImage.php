@@ -16,7 +16,7 @@ class CarImage
     #[ORM\Column(length: 255)]
     private ?string $fileName = null;
 
-    #[ORM\ManyToOne(inversedBy: 'carImage')]
+    #[ORM\OneToOne(inversedBy: 'carImage', targetEntity: Car::class)]
     private ?Car $car = null;
 
     public function getId(): ?int
@@ -36,6 +36,9 @@ class CarImage
         return $this;
     }
 
+    /**
+     * @return Car|null
+     */
     public function getCar(): ?Car
     {
         return $this->car;

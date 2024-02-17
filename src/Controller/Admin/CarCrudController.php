@@ -36,19 +36,4 @@ class CarCrudController extends AbstractCrudController
             yield AssociationField::new('carImage');
         
     }
-
-    public function persistEntity($entityManager, $entityInstance): void
-{
-    // Si l'entité est une instance de Car
-    if ($entityInstance instanceof Car) {
-        // Associez les images à la voiture
-        foreach ($entityInstance->getCarImage() as $carImage) {
-            $carImage->setCar($entityInstance);
-        }
-    }
-
-    // Passez à la méthode parente pour effectuer la persistance réelle
-    parent::persistEntity($entityManager, $entityInstance);
-}
-    
 }

@@ -41,18 +41,20 @@ class Car
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'car', targetEntity: CarImage::class, cascade: ['persist', 'remove'])]
-    private Collection $carImage;
+    #[ORM\OneToOne(mappedBy: 'car', targetEntity: CarImage::class, cascade: ['persist', 'remove'])]
+    private ?CarImage $carImage = null;
 
     public function __construct()
     {
-        $this->carImage = new ArrayCollection();
+        // Mettez à jour le constructeur pour ne pas initialiser la collection ici
+        // $this->carImage = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function getName(): ?string
     {
@@ -151,37 +153,22 @@ class Car
     }
 
     /**
-     * @return Collection<int, CarImage>
+     * @return CarImage|null
      */
-    public function getCarImage(): Collection
+    public function getCarImage(): ?CarImage
     {
         return $this->carImage;
     }
 
-    public function addCarImage(CarImage $carImage): static
+    public function setCarImage(?CarImage $carImage): static
     {
-        if (!$this->carImage->contains($carImage)) {
-            $this->carImage->add($carImage);
+        $this->carImage = $carImage;
+
+        // Assurez-vous de mettre à jour le côté inverse de la relation dans CarImage
+        if ($carImage !== null && $carImage->getCar() !== $this) {
             $carImage->setCar($this);
         }
 
         return $this;
-    }
-
-    public function removeCarImage(CarImage $carImage): static
-    {
-        if ($this->carImage->removeElement($carImage)) {
-            // set the owning side to null (unless already changed)
-            if ($carImage->getCar() === $this) {
-                $carImage->setCar(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->name . "(" . $this->id .  ")";
     }
 }
