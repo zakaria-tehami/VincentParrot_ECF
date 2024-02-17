@@ -11,7 +11,7 @@
         <div class="overflow-hidden">
             <div class="container px-5">
                 {% if car.carImage %}
-            {% set firstCarImage = car.carImage.first %}
+            {% set firstCarImage = car.carImage %}
             <img src="{{ asset('uploads/' ~ firstCarImage.filename) }}" class="card-img-top" alt="Image">
         {% endif %}
             </div>
